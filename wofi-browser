@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd ~/Bookmarks
+SEARCH=$(find * -type f | wofi -d -G)
+
+if [ -f '${SEARCH}' ]; then
+  swaymsg exec -- vimb $(cat $SEARCH)
+elif [ "$SEARCH" ]; then
+  SEARCH=$(echo $SEARCH | sed "s| |%20|")
+  swaymsg exec -- vimb "https://html.duckduckgo.com/html/?q=$SEARCH"
+fi
